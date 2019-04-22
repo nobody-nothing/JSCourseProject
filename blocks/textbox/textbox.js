@@ -1,10 +1,16 @@
-(function(){
-'use strict';
-
-const Block = window.Block;
-
-class Textbox extends Block{
-}	
+import { Block } from '../block';
+import template from './textbox.pug';
+import _ from './textbox.scss';  
+ 
+export class Textbox extends Block {
 	
-window.Textbox = Textbox;	
-})()
+	template(data) {
+		return template(data);
+	
+	}
+	
+	constructor(...args) {
+		super(...args);
+		this.template = template;
+	}
+}
