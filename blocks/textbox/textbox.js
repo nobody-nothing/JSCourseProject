@@ -22,5 +22,4 @@ export class Textbox extends Block {
     get value () {
         return this.getElement('input').value;
     }
-
 }

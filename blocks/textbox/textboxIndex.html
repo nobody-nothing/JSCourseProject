@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<title>TextBox</title>
+	<link rel='stylesheet' href='textbox.css'/>
+	<script src='../../dist/toolkit.js'></script>
+</head>
+<body>
+
+	<div class='js-textbox'></div>
+	<div class='js-textbox-disabled'></div>
+	<script>
+	(function () {
+	'use strict';
+	
+	const textbox = new Textbox(document.querySelector('.js-textbox'), {
+		label: 'Пример активного текстбокса',
+		value: 'hello world'
+	});
+	
+	const textbox2 = new Textbox(document.querySelector('.js-textbox-disabled'), {
+		label: 'Пример активного текстбокса',
+		value: 'hello world',
+		mod: ['disabled']
+	});
+	
+	
+	textbox.render();
+	textbox2.render()
+	
+	
+	})();
+	</script>
+</body>
+</html>

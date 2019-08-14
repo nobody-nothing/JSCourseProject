@@ -1,4 +1,3 @@
-
 module.exports = {
   entry: './blocks/block.js',
   output: {
