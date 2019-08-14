@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = '../../../dist/contacts.js'></script>
+    <link href = '../../../libs/bemskel.min.css' rel = 'stylesheet'/>
+
+</head>
+<body>
+    <h1>Пагинация</h1>
+    <div class  = 'js-pagination'></div>
+    <script>
+      (function () {
+        'use strict';
+
+        const pagination = new Pagination();
+
+        pagination.render(document.querySelector('.js-pagination'));
+
+      })()
+    </script>
+
+</body>
+</html>
