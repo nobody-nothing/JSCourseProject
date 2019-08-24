@@ -54,14 +54,13 @@ export class Register extends Block {
     request.responseType = 'json';
     request.send();
 
-    let resultFin;
-
     request.onload = function(){
       let result = request.response;
-      resultFin = result;
+
+      return result;
     };
 
-    console.log(resultFin);
+    console.log(request);
     }
 
   verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
