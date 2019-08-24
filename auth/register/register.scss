@@ -1,0 +1,37 @@
+@import '../../libs/purecss.min.css';
+
+form {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+input {
+  width: 100%;
+}
+
+._nopass {
+    background-color: #ff9999;
+  }
+
+._pass {
+    background-color: #adebad;
+  }
+
+fieldset {
+  /*
+  color: rgba(192, 192, 192, 0.75);
+  */
+  margin: auto;
+}
+
+button {
+  margin: auto;
+}
+
+h3 {
+  margin: 0;
+}

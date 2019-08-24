@@ -13,7 +13,7 @@ export class Block {
     }
 
     getElement(name) {
-      return this.el.querySelector(`.${this.bemName}__${name}`);
+      return this.el.querySelector(`.${this.bemName}_${name}`);
     }
 
     render(el) {

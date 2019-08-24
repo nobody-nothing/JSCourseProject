@@ -1,0 +1,27 @@
+form.pure-form.pure-form-aligned
+    h3 Регистрация аккаунта
+    fieldset
+        h4 Имя:
+        .register_name
+            input(type='text', placeholder='User Name')
+        |
+        h4 Почта:
+        h5.emailNotValid(hidden='true')  Почта не подходит
+        .register_email
+            input(type='email', placeholder='Email Address')
+        |
+        h4 Пароль:
+        .register_password
+            input(type='password', placeholder='Password')
+        |
+        h4 Подтверждение пароля:
+        h5.passNotValid(hidden='true')  Пароли не совпадают
+        .register_passwordConfirm
+            input(type='passwordCon', placeholder='Password Confirm')
+        |
+        h4 Номер телефона:
+        h5.phoneNotValid(hidden='true')  Неподходящий номер телефона
+        .register_phoneNum
+            input(type='phonenum', placeholder='Phone Number')
+        |
+        button.pure-button.pure-button-primary(type='submit') Submit

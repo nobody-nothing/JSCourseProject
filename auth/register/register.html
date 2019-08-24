@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = '../../dist/auth.js'></script>
+    <link href="../../libs/purecss.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class = 'register-form'></div>
+<script>
+  (function(){
+    'use strict';
+
+    const registerForm = new Register();
+
+    registerForm.render(document.querySelector('.register-form'));
+  })()
+
+</script>
+</body>
+</html>
