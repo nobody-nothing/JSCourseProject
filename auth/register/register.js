@@ -50,18 +50,16 @@ export class Register extends Block {
   validatePhone(phone) {
     const URL = `http://apilayer.net/api/validate?access_key=84e38f01e802a56aee9867c979fb810d&number=${phone}&country_code&format=1`;
     let request = new XMLHttpRequest();
-    request.open('GET', URL);
+    request.open('GET', URL, true);
     request.responseType = 'json';
     request.send();
 
     request.onload = function(){
       let result = request.response;
-
       return result;
     };
 
-    console.log(request);
-    }
+  }
 
   verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
     let passport;
