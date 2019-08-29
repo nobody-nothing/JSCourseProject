@@ -1,4 +1,5 @@
 import _ from './register.scss';
+import 'babel-polyfill';
 import template from './register-pug.pug';
 import { Block } from '../../blocks/block';
 import { Textbox } from '../../blocks/textbox/textbox';
@@ -49,16 +50,18 @@ export class Register extends Block {
 
   validatePhone(phone) {
     const URL = `http://apilayer.net/api/validate?access_key=84e38f01e802a56aee9867c979fb810d&number=${phone}&country_code&format=1`;
-    let request = new XMLHttpRequest();
-    request.open('GET', URL, true);
-    request.responseType = 'json';
-    request.send();
+    let promise = new Promise(async function (resolve, reject) {
+      let response = await fetch(URL);
+      if (response.ok) {
+        promise.result = await response.json();
+        resolve('done');
+      } else {
+        console.log('oops error ' + response.status);
+      };
+    })
 
-    request.onload = function(){
-      let result = request.response;
-      return result;
-    };
-
+    console.log(promise);
+    console.log(promise.result);
   }
 
   verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
