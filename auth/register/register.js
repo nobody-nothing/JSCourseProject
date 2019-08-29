@@ -48,24 +48,21 @@ export class Register extends Block {
     return re.test(String(email).toLowerCase());
   }
 
-  validatePhone(phone) {
-    const URL = `http://apilayer.net/api/validate?access_key=84e38f01e802a56aee9867c979fb810d&number=${phone}&country_code&format=1`;
-    let promise = new Promise(async function (resolve, reject) {
-      let response = await fetch(URL);
+  async validatePhone(phone) {
+    let result;
+    const URL = `http://apilayer.net/api/validate?access_key=74d7d74c65cfec612593922d35f77fb7&number=${phone}&country_code&format=1`;
+    let response = await fetch(URL);
       if (response.ok) {
-        promise.result = await response.json();
-        resolve('done');
+        result = await response.json();
       } else {
         console.log('oops error ' + response.status);
       };
-    })
 
-    console.log(promise);
-    console.log(promise.result);
+    console.log(result.valid);
+    return result.valid;
   }
 
   verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
-    let passport;
 
     if (!this.validateEmail(userEmail)) {
       document.getElementById('email').classList.add('_nopass');
@@ -87,10 +84,12 @@ export class Register extends Block {
       });
     };
 
-    if (!this.validatePhone(userPhoneNum)) {
+    if (this.validatePhone(userPhoneNum)) {
+      console.log('pass - ');
       document.getElementById('phone').classList.add('_nopass');
       document.querySelector('.phoneNotValid').hidden = false;
     } else {
+      console.log('pass + ');
       document.getElementById('phone').classList.add('_pass');
       document.querySelector('.phoneNotValid').hidden = true;
     };
