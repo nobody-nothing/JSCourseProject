@@ -1,5 +1,4 @@
 import _ from './register.scss';
-import 'babel-polyfill';
 import template from './register-pug.pug';
 import { Block } from '../../blocks/block';
 import { Textbox } from '../../blocks/textbox/textbox';
@@ -48,18 +47,11 @@ export class Register extends Block {
     return re.test(String(email).toLowerCase());
   }
 
-  async validatePhone(phone) {
-    let result;
-    const URL = `http://apilayer.net/api/validate?access_key=74d7d74c65cfec612593922d35f77fb7&number=${phone}&country_code&format=1`;
-    let response = await fetch(URL);
-      if (response.ok) {
-        result = await response.json();
-      } else {
-        console.log('oops error ' + response.status);
-      };
-
-    console.log(result.valid);
-    return result.valid;
+  validatePhone(phone) {
+    const URL = `http://apilayer.net/api/validate?access_key=9e5cdddd01eed82d6968658030baeac4&number=${phone}&country_code&format=1`;
+    return fetch(URL)
+      .then(response => response.json())
+      .then(data => data.valid)
   }
 
   verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
@@ -70,7 +62,8 @@ export class Register extends Block {
     } else {
       document.getElementById('email').classList.add('_pass');
       document.querySelector('.emailNotValid').hidden = true;
-    };
+    }
+    ;
 
     if (userPassword !== userPasswordConfirm) {
       document.getElementById('passwordCon').classList.add('_nopass');
@@ -82,17 +75,19 @@ export class Register extends Block {
       document.querySelectorAll('.passNoMatch').forEach((elem) => {
         elem.hidden = true;
       });
-    };
+    }
+    ;
 
-    if (this.validatePhone(userPhoneNum)) {
-      console.log('pass - ');
-      document.getElementById('phone').classList.add('_nopass');
-      document.querySelector('.phoneNotValid').hidden = false;
-    } else {
-      console.log('pass + ');
-      document.getElementById('phone').classList.add('_pass');
-      document.querySelector('.phoneNotValid').hidden = true;
-    };
+    this.validatePhone(userPhoneNum).then(isValid => {
+      if (!isValid) {
+        document.getElementById('phone').classList.add('_nopass');
+        document.querySelector('.phoneNotValid').hidden = false;
+      } else {
+        document.getElementById('phone').classList.add('_pass');
+        document.querySelector('.phoneNotValid').hidden = true;
+      }
+      ;
+    })
   }
 
   render(el) {
