@@ -1,4 +1,5 @@
 import _ from './register.scss';
+require("babel-polyfill");
 import template from './register-pug.pug';
 import { Block } from '../../blocks/block';
 import { Textbox } from '../../blocks/textbox/textbox';
@@ -36,7 +37,7 @@ export class Register extends Block {
       required: false
     });
     this.userPhoneNum = new Textbox({
-      value: '1234567890000',
+      value: '+79969719904',
       id: 'phone',
       required: false
     })
@@ -54,40 +55,62 @@ export class Register extends Block {
       .then(data => data.valid)
   }
 
-  verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
+  async verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
+    console.log(arguments);
+    let passport = [0,0,0];
 
     if (!this.validateEmail(userEmail)) {
+      document.getElementById('email').classList.remove('_pass');
       document.getElementById('email').classList.add('_nopass');
       document.querySelector('.emailNotValid').hidden = false;
+      passport[0] = 0;
     } else {
+      document.getElementById('email').classList.remove('_nopass');
       document.getElementById('email').classList.add('_pass');
       document.querySelector('.emailNotValid').hidden = true;
-    }
-    ;
+      passport[0] = 1;
+    };
 
     if (userPassword !== userPasswordConfirm) {
+      document.getElementById('passwordCon').classList.remove('_pass');
       document.getElementById('passwordCon').classList.add('_nopass');
       document.querySelector('.passNotValid').hidden = false;
+      passport[1] = 0;
+
     } else {
+      document.getElementById('password').classList.remove('_nopass');
       document.getElementById('password').classList.add('_pass');
+      document.getElementById('passwordCon').classList.remove('_nopass');
       document.getElementById('passwordCon').classList.add('_pass');
 
       document.querySelectorAll('.passNoMatch').forEach((elem) => {
         elem.hidden = true;
       });
-    }
-    ;
+      passport[1] = 1;
+    };
 
-    this.validatePhone(userPhoneNum).then(isValid => {
+    await this.validatePhone(userPhoneNum).then(isValid => {
       if (!isValid) {
+        document.getElementById('phone').classList.remove('_pass');
         document.getElementById('phone').classList.add('_nopass');
         document.querySelector('.phoneNotValid').hidden = false;
+        passport[2] = 0;
       } else {
+        document.getElementById('phone').classList.remove('_nopass');
         document.getElementById('phone').classList.add('_pass');
         document.querySelector('.phoneNotValid').hidden = true;
-      }
-      ;
+        passport[2] = 1;
+      };
     })
+
+    if (passport.indexOf(0) != -1) {
+      document.querySelector('.verifyNotPassed').hidden = false;
+      console.log('shits no pass, m8');
+    } else {
+      document.querySelector('.verifyNotPassed').hidden = true;
+      console.log('verify passed');
+    }
+
   }
 
   render(el) {
@@ -100,7 +123,7 @@ export class Register extends Block {
 
     this.el.querySelector('form').addEventListener('submit', event => {
      event.preventDefault();
-     const newUser = this.verify(this.userEmail.value, this.userPassword.value, this.userPasswordConfirm.value, this.userPhoneNum.value);
+     this.verify(this.userEmail.value, this.userPassword.value, this.userPasswordConfirm.value, this.userPhoneNum.value);
     });
   }
 }
