@@ -27,12 +27,12 @@ export class Register extends Block {
       required: false
     });
     this.userPassword = new Textbox({
-      value: '123',
+      value: '',
       id: 'password',
       required: false
     });
     this.userPasswordConfirm = new Textbox({
-      value: '1234',
+      value: '',
       id: 'passwordCon',
       required: false
     });
