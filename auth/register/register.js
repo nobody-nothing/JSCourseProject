@@ -22,7 +22,7 @@ export class Register extends Block {
       required: false
     });
     this.userEmail = new Textbox({
-      value: 'test@mail.com',
+      value: '',
       id: 'email',
       required: false
     });
@@ -56,19 +56,26 @@ export class Register extends Block {
   }
 
   async verify (userEmail, userPassword, userPasswordConfirm, userPhoneNum, userName) {
-    console.log(arguments);
     let passport = [0,0,0];
 
-    if (!this.validateEmail(userEmail)) {
-      document.getElementById('email').classList.remove('_pass');
-      document.getElementById('email').classList.add('_nopass');
-      document.querySelector('.emailNotValid').hidden = false;
-      passport[0] = 0;
-    } else {
+
+    if (userEmail.length == 0) {
+      console.log(userEmail.length);
+      console.log('required check passed');
+      console.log(document.getElementById('email').required);
+      document.getElementById('email').required = true;
+
+    } else if (this.validateEmail(userEmail)) {
       document.getElementById('email').classList.remove('_nopass');
       document.getElementById('email').classList.add('_pass');
       document.querySelector('.emailNotValid').hidden = true;
       passport[0] = 1;
+
+    } else {
+      document.getElementById('email').classList.remove('_pass');
+      document.getElementById('email').classList.add('_nopass');
+      document.querySelector('.emailNotValid').hidden = false;
+      passport[0] = 0;
     };
 
     if (userPassword !== userPasswordConfirm) {
@@ -89,7 +96,7 @@ export class Register extends Block {
       passport[1] = 1;
     };
 
-    await this.validatePhone(userPhoneNum).then(isValid => {
+/*    await this.validatePhone(userPhoneNum).then(isValid => {
       if (!isValid) {
         document.getElementById('phone').classList.remove('_pass');
         document.getElementById('phone').classList.add('_nopass');
@@ -101,7 +108,7 @@ export class Register extends Block {
         document.querySelector('.phoneNotValid').hidden = true;
         passport[2] = 1;
       };
-    })
+    })*/
 
     if (passport.indexOf(0) != -1) {
       document.querySelector('.verifyNotPassed').hidden = false;
