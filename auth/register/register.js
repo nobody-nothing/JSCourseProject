@@ -19,27 +19,27 @@ export class Register extends Block {
     this.userName = new Textbox({
       value: 'Vasya',
       id: 'name',
-      required: false
+      required: true
     });
     this.userEmail = new Textbox({
       value: '',
       id: 'email',
-      required: false
+      required: true
     });
     this.userPassword = new Textbox({
       value: '',
       id: 'password',
-      required: false
+      required: true
     });
     this.userPasswordConfirm = new Textbox({
       value: '',
       id: 'passwordCon',
-      required: false
+      required: true
     });
     this.userPhoneNum = new Textbox({
       value: '+79969719904',
       id: 'phone',
-      required: false
+      required: true
     })
   }
 
@@ -59,18 +59,11 @@ export class Register extends Block {
     let passport = [0,0,0];
 
 
-    if (userEmail.length == 0) {
-      console.log(userEmail.length);
-      console.log('required check passed');
-      console.log(document.getElementById('email').required);
-      document.getElementById('email').required = true;
-
-    } else if (this.validateEmail(userEmail)) {
+    if (this.validateEmail(userEmail)) {
       document.getElementById('email').classList.remove('_nopass');
       document.getElementById('email').classList.add('_pass');
       document.querySelector('.emailNotValid').hidden = true;
       passport[0] = 1;
-
     } else {
       document.getElementById('email').classList.remove('_pass');
       document.getElementById('email').classList.add('_nopass');
@@ -78,12 +71,18 @@ export class Register extends Block {
       passport[0] = 0;
     };
 
-    if (userPassword !== userPasswordConfirm) {
+    if (userPassword.length == 0) {
+      document.getElementById('password').classList.add('_nopass');
+      document.getElementById('passwordCon').classList.add('_nopass');
+      document.querySelectorAll('.passNoMatch').forEach((elem) => {
+        elem.hidden = true;
+      });
+
+    } else if (userPassword !== userPasswordConfirm) {
       document.getElementById('passwordCon').classList.remove('_pass');
       document.getElementById('passwordCon').classList.add('_nopass');
       document.querySelector('.passNotValid').hidden = false;
       passport[1] = 0;
-
     } else {
       document.getElementById('password').classList.remove('_nopass');
       document.getElementById('password').classList.add('_pass');
@@ -96,7 +95,7 @@ export class Register extends Block {
       passport[1] = 1;
     };
 
-/*    await this.validatePhone(userPhoneNum).then(isValid => {
+    /*await this.validatePhone(userPhoneNum).then(isValid => {
       if (!isValid) {
         document.getElementById('phone').classList.remove('_pass');
         document.getElementById('phone').classList.add('_nopass');
@@ -108,8 +107,8 @@ export class Register extends Block {
         document.querySelector('.phoneNotValid').hidden = true;
         passport[2] = 1;
       };
-    })*/
-
+    })
+*/
     if (passport.indexOf(0) != -1) {
       document.querySelector('.verifyNotPassed').hidden = false;
       console.log('shits no pass, m8');

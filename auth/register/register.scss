@@ -11,15 +11,13 @@ form {
 
 input {
   width: 100%;
-}
-
-._nopass {
+  &._nopass {
     background-color: #ff9999;
   }
-
-._pass {
+  &._pass {
     background-color: #adebad;
   }
+}
 
 fieldset {
   /*
