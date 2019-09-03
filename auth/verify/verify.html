@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = '../../dist/auth.js'></script>
+    <link href="../../libs/purecss.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class = 'login-form'></div>
+<script>
+  (function(){
+    'use strict';
+
+    const verifyForm = new Verify();
+
+    verifyForm.render(document.querySelector('.verify-form'));
+  })()
+</script>
+</body>
+</html>
