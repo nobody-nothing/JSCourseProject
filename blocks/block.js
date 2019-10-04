@@ -17,7 +17,9 @@ export class Block {
     }
 
     render(el) {
+        console.log('render in block');
         this.el = el;
         this.el.innerHTML = this.template(this.options);
+        console.log('render complete');
     }
 }

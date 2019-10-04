@@ -11,6 +11,4 @@ export class ContactList extends Block {
     return template(data);
   }
 
-  render(el) {
-  }
 }

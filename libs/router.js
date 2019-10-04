@@ -16,6 +16,7 @@ export class Router {
       this.activeRoute.toggle(false);
     }
 
+
     this.activeRoute = this.routes[route] || this.defaultRoute;
     this.routes[route].toggle(true);
   }

@@ -21,7 +21,7 @@ export class ContactListView extends View {
 
   render(el) {
     super.render(el);
-    this.contacts.render(this.getElement('contact'));
+    this.contacts.render(this.getElement('contacts'));
     this.pagination.render(this.getElement('pagination'));
 
   }

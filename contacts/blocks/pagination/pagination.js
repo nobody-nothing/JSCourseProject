@@ -10,5 +10,4 @@ export class Pagination extends Block {
   template (data) {
     return template(data);
   }
-
 }

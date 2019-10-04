@@ -9,13 +9,17 @@
 </head>
 <body>
 
-    <h1>Список контактов</h1>
-    <div class  = 'js-contact-list'></div>
+    <h1>Карточка контактов</h1>
+
+    <div class="js-contact-card"></div>
+
     <script>
       (function () {
         'use strict';
+        const contactCard = new ContactCard();
+        contactCard.render(document.querySelector('.js-contact-card'));
+      })();
 
-      })()
     </script>
 
 </body>
