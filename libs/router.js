@@ -1,31 +1,27 @@
 export class Router {
   constructor () {
     this.routes = {};
+    this.defaultRoute = null;
   }
-
   register (route, view, isDefault = false) {
     this.routes[route] = view;
-
     if (isDefault) {
       this.defaultRoute = view;
     }
   }
-
-  onRoute(route){
+  onRoute (route) {
     if (this.activeRoute) {
       this.activeRoute.toggle(false);
     }
-
-
     this.activeRoute = this.routes[route] || this.defaultRoute;
-    this.routes[route].toggle(true);
+
+    this.activeRoute.toggle(true);
   }
 
-  start() {
+  start () {
     this.onRoute(window.location.hash.replace('#', ''));
-    window.addEventListener('hashchange', event => {
-      this.onRoute(window.location.hash.replace('#', ''));
+    window.addEventListener('hashchange', () => {
+      this.onRoute(window.location.hash.replace('#', ''))
     });
   }
-
 }

@@ -1,12 +1,12 @@
 import { Block } from '../../../blocks/block';
-import template from './contact-card-pug.pug';
+import template from './contacts-list-pug.pug';
 /* eslint-disable */
-import _ from './contact-card.scss';
+import _ from './contacts-list.scss';
 /* eslint-enable */
 
-export class ContactCard extends Block {
+export class ContactsList extends Block {
   get bemName () {
-    return 'contact-card';
+    return 'contacts-list';
   }
   template (data) {
     return template(data);

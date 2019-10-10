@@ -1,32 +1,23 @@
 import { ContactCard } from './blocks/contact-card/contact-card';
-import { ContactList } from './blocks/contacts-list/contact-list';
+import { ContactsList } from './blocks/contacts-list/contacts-list';
 import { Pagination } from './blocks/pagination/pagination';
 
-import { ContactCardView } from './blocks/views/card/contact-card-view';
-import { ContactListView } from './blocks/views/list/contact-list-view';
+import { Card } from './views/card/card';
+import { List } from './views/list/list';
 import { Router } from '../libs/router';
 
 window.ContactCard = ContactCard;
-window.ContactList = ContactList;
+window.ContactsList = ContactsList;
 window.Pagination = Pagination;
 
 window.addEventListener('DOMContentLoaded', () => {
-
-  const cardView = new ContactCardView();
-  const listView = new ContactListView();
+  const cardView = new Card();
+  const listView = new List();
   const router = new Router();
 
-  console.log('pre-render');
-  console.log('card view render initiated');
-  cardView.render(document.querySelector('.js-card-view'));
-  console.log('card view render complete');
-  console.log('contacts view render initiated');
-  listView.render(document.querySelector('.js-contacts-view'));
-  console.log('contacts view render complete');
-  console.log('post-render');
+  cardView.render(document.querySelector('.js-view-card'));
+  listView.render(document.querySelector('.js-view-contacts'));
   router.register('contacts', listView, true);
   router.register('card', cardView);
-  console.log('router registration');
   router.start();
-
-})
+});

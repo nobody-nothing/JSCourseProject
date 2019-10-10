@@ -1,7 +1,7 @@
-import { Block } from '../../../blocks/block';
+import { Block } from '../../blocks/block';
 
 export class View extends Block {
-  render(el) {
+  render (el) {
     super.render(el);
     this.el.hidden = true;
   }
