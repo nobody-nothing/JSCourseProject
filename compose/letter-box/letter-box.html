@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма Письма</title>
+    <script src = '../../dist/compose.js'></script>
+    <link href="../../libs/purecss.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h5>Форма Письма</h5>
+<div class = 'letter-box'></div>
+
+<script>
+  (function(){
+    'use strict';
+
+    const letterBox = new LetterBox();
+
+    letterBox.render(document.querySelector('.letter-box'));
+  })();
+</script>
+
+</body>
+</html>
